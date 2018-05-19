@@ -1,0 +1,5 @@
+__pycache__/
+ioeEnv/
+ngrok
+premier.py
+storeId.py
