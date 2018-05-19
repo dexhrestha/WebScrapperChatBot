@@ -3,7 +3,7 @@
 <p>This is a messenger chatbot used to notify subscribers about new notices by constantly monitoring the notice website.</p>
 
 <ul>
-  <li>git clone http://github.com/dexhrestha/web.git</li>
+  <li>git clone http://github.com/dexhrestha/WebScrapperChatBot.git</li>
   <li>pip install requirements.txt</li>
   <li>flask run</li>
   <li>ngrok http 5000</li>
