@@ -1,5 +1,4 @@
-__pycache__/
 ioeEnv/
-ngrok
+__pycache__/
 premier.py
-storeId.py
+requirements

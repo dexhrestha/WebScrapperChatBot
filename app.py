@@ -1,12 +1,26 @@
 import os,sys,requests
+from utils import ioeBot
+# from detectChange import detectChange
 from flask import Flask,request
 from pymessenger import Bot
-from utils import ioeBot
+import datetime
 PAGE_TOKEN = open('token.txt','r').readline()
+
+ADMIN_SENDER_ID = "1928179273867668"
+SLEEP_TIME = 60
 
 app = Flask(__name__)
 
 bot = Bot(PAGE_TOKEN)
+
+print('apple')
+
+
+# START=datetime.datetime.now
+# print(START)
+
+# if(START-datetime.datetime.now==20):
+#     detectChange()
 
 @app.route('/',methods=['GET'])
 def verify_webhook():
@@ -35,28 +49,30 @@ def webhook():
                     #if message is a text save text
                     if 'text' in messaging_event['message']:
                         messaging_text=messaging_event['message']['text']
-                       
+                        # if(sender_id=ADMIN_SENDER_ID and )
                         result = bot.send_text_message(sender_id,messaging_text)
                        
                     else:
                         messaging_text='Not a text'
                     
                     categories = ioe_bot.get_message_response(messaging_text)
+                    print("categories:")
                     print(categories)
                     if categories['subscribe'] != None:
-                       
-                        
-                       
-                        try:
-                            res = ioe_bot.save_sender_id()
-                            if res:
-                                result = bot.send_text_message(sender_id,'Thank you for your subscription,'+ioe_bot.get_user_name()+'!')
-                            else:
-                                result = bot.send_text_message(sender_id,ioe_bot.get_user_name+', you have already subscribed!! Thank you!!')
-                            print(res)
-                        except :
-                            print("***********Cannot************")
-                #if message is a postback                        
+                        res = ioe_bot.save_sender_id()
+                        print('res')
+                        print(res)
+                        if res:
+                            print('res2')
+                            result = bot.send_text_message(sender_id,'Thank you for your subscription,'+ioe_bot.get_user_name()+'!')
+                        else:
+                            result = bot.send_text_message(sender_id,ioe_bot.get_user_name()+', you have already subscribed!! Thank you!!')
+                            
+                if messaging_event.get('postback'):
+                    if (messaging_event['postback']['payload']=='firsthandshake'):
+                        get_started_text='Hello would you like to subscribe?'
+                        result = bot.send_text_message(sender_id,get_started_text) 
+
     return "ok",200
 
 def log(message):

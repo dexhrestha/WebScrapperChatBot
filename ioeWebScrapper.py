@@ -24,8 +24,6 @@ def get_notices(site,page_no):
                 notice = notice.find_all('td')[1].contents
                 notices_links.append(notice[0]['href'])
                 notices_text.append(notice[0].contents[0])
-
-            
             
 ##            df_notices = pd.DataFrame(notices_td,columns=["Notices"])
 
@@ -56,7 +54,7 @@ def get_json(site,page_no):
 ##    print(py_json,type(py_json))
     return py_json
 
-print(to_json(site,3))
+# print(to_json(site,1))
 
 
 
