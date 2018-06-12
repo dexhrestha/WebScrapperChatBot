@@ -1,1 +1,1 @@
-web: gunicorn app:app ; python detectChange.py 
+web: python app.py ; python detectChange.py 
