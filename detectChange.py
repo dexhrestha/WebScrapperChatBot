@@ -21,6 +21,8 @@ sched = BlockingScheduler()
 
 sleep_time = ioe_bot.get_sleep_time()
 
+subscribers_list = []
+
 def send_notice():
     for x in subscribers_list:
             # ioe_bot = ioeBot(x)
