@@ -57,7 +57,6 @@ def detectChange():
                 # result = bot.send_text_message(x,'notice')
             if prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'] != now_top_notice[0]['title']:
                 #messenger sends message to all
-
                 print("change")
                 send_notice()
                 ioe_bot.save_new_notice(now_top_notice[0])
