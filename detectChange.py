@@ -5,7 +5,7 @@ from utils import ioeBot
 from pymessenger import Bot
 import time
 import redis
-from rq import Worker,Queue,Connection
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 PAGE_TOKEN = open('token.txt','r').readline()
 
@@ -16,6 +16,8 @@ ioe_bot = ioeBot()
 main_site = "http://exam.ioe.edu.np"
 
 site = "http://exam.ioe.edu.np/?page="
+
+sched = BlockingScheduler()
 
 sleep_time = ioe_bot.get_sleep_time()
 
@@ -40,7 +42,7 @@ def send_notice():
             result = bot.send_generic_message(x,elements)
             print(result)
 
-def detectChange(sleep_time=20):
+def detectChange():
     try:
         while True:
             prev_top_notice = ioe_bot.get_prev_notice()
@@ -64,11 +66,13 @@ def detectChange(sleep_time=20):
             # print(prev_top_notice['title'])
             else:
                 print("equal")
-            time.sleep(sleep_time)
+           
             # time.sleep(20)
     except Exception as e:
         print('Exception:'+str(e))
 
-if __name__== "__main__":
-    detectChange(sleep_time)
-   
+@sched.scheduled_job('interval',minutes=sleep_time)
+def time_job():
+    print('Run every'+str(sleep_time)+'minutes')
+
+sched.start()

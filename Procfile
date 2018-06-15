@@ -1,2 +1,2 @@
-web: gunicorn app:app
-worker: python detectChange.py 
+web: gunicorn app:app 
+clock: python detectChange.py 
