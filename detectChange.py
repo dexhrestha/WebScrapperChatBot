@@ -48,7 +48,6 @@ def send_notice():
 
 def detectChange():
     try:
-        
         prev_top_notice = ioe_bot.get_prev_notice()
         print(prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'])
         now_top_notice,_ = to_json(site,1)
