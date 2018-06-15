@@ -51,9 +51,13 @@ def webhook():
                 if messaging_event.get('message'):
                     #if message is a text save text
                     if 'text' in messaging_event['message']:
+
                         messaging_text=messaging_event['message']['text']
                         # if(sender_id=ADMIN_SENDER_ID and )
                         result = bot.send_text_message(sender_id,messaging_text)
+                        # if sender_id = '1928179273867668' and int(messaging_event['message']['text']>1):
+                            # ioe_bot.set_sleep_time(int(messaging_event['message']['text']))
+
                        
                     else:
                         messaging_text='Not a text'

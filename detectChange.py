@@ -26,7 +26,7 @@ def send_notice():
     subscribers_list=ioe_bot.get_subscribers()
     now_top_notice,_ = to_json(site,1)
     new_notice_title = now_top_notice[0]['title']
-    new_notice_fiel = now_top_notice[0]['file']
+    new_notice_file = now_top_notice[0]['file']
     print(subscribers_list)
     print(new_notice_file)
     print(new_notice_title)

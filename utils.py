@@ -42,6 +42,10 @@ class ioeBot:
         result=2
         return result
 
+    def set_sleep_time(self,sleep):
+        result = self.firebase.put('/sleep','ssss',sleep)
+        return result
+        
     def get_prev_notice(self):
         result = self.firebase.get('/notice',None)
         return result
