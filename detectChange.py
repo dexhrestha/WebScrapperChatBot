@@ -26,6 +26,8 @@ subscribers_list = []
 
 def send_notice():
     print('send NOTICEEEEEEEEEE')
+    print(new_notice_file)
+    print(new_notice_title)
     for x in subscribers_list:
             # ioe_bot = ioeBot(x)
             elements = [{'title':'Notice',
