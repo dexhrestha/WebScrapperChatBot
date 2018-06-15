@@ -38,14 +38,14 @@ class ioeBot:
         return result
 
     def get_sleep_time(self):
-        # result = self.firebase.get('/sleep',None)
-        result=2
+        result = self.firebase.get('/sleep',None)
+        # result=2
         return result
 
     def set_sleep_time(self,sleep):
         result = self.firebase.put('/sleep','ssss',sleep)
         return result
-        
+
     def get_prev_notice(self):
         result = self.firebase.get('/notice',None)
         return result

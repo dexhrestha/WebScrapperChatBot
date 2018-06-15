@@ -19,7 +19,7 @@ site = "http://exam.ioe.edu.np/?page="
 
 sched = BlockingScheduler()
 
-sleep_time = ioe_bot.get_sleep_time()
+sleep_time = ioe_bot.get_sleep_time()['ssss']
 
 def send_notice():
     # print('send NOTICEEEEEEEEEE')
@@ -72,7 +72,9 @@ def detectChange():
 
 @sched.scheduled_job('interval',minutes=sleep_time)
 def time_job():
+    print(sleep_time)
     print('Run every'+str(sleep_time)+'minutes')
     detectChange()
 
 sched.start()
+
