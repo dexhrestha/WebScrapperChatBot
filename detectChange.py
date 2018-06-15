@@ -20,17 +20,16 @@ site = "http://exam.ioe.edu.np/?page="
 sched = BlockingScheduler()
 
 sleep_time = ioe_bot.get_sleep_time()
-new_notice_title = ""
-new_notice_file = ""
+new_notice_title = "haha "
+new_notice_file = "asdfasd"
 subscribers_list = []
 
 def send_notice():
-    print('send NOTICEEEEEEEEEE')
+    # print('send NOTICEEEEEEEEEE')
+    print(subscribers_list)
     print(new_notice_file)
     print(new_notice_title)
-    for x in subscribers_list:
-            # ioe_bot = ioeBot(x)
-            elements = [{'title':'Notice',
+    elements = [{'title':'Notice',
                         'subtitle':new_notice_title,
                         'default_action':{
                             'type': 'web_url',
@@ -43,21 +42,25 @@ def send_notice():
                             'url':'https://exam.ioe.edu.np',
                             'title':'View website'
                              }],
-                        'image_url' : 'https://cdn.pixabay.com/photo/2017/02/10/17/11/table-2055700_960_720.jpg'}]
+                        'image_url' : 'https://cdn.pixabay.com/photo/2017/02/10/17/11/table-2055700_960_720.jpg'
+                        }]
 
+    for x in subscribers_list:
+            # ioe_bot = ioeBot(x)
             result = bot.send_generic_message(x,elements)
             print(result)
 
 def detectChange():
     try:
         prev_top_notice = ioe_bot.get_prev_notice()
-        print(prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'])
+        # print(prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'])
         now_top_notice,_ = to_json(site,1)
-        print(now_top_notice[0]['title'])
-        new_notice_title = now_top_notice[0]['title']
-        new_notice_file = now_top_notice[0]['file']
+        # print(now_top_notice[0]['title'])
+        # new_notice_title = now_top_notice[0]['title']
+        # new_notice_file = now_top_notice[0]['file']
+        print(type(now_top_notice[0]['title']))
         subscribers_list=ioe_bot.get_subscribers()
-        print(subscribers_list)
+        # print(subscribers_list)
             # ioe_bot.send_quick_replies('notice',['1','2'])
             # print(ioebot.get_sender())
             # print(x)
