@@ -55,7 +55,7 @@ def webhook():
                         messaging_text=messaging_event['message']['text']
                         # if(sender_id=ADMIN_SENDER_ID and )
                         result = bot.send_text_message(sender_id,messaging_text)
-                        if sender_id = '1928179273867668' and int(messaging_event['message']['text']>1):
+                        if sender_id == '1928179273867668' and int(messaging_event['message']['text']>1):
                             ioe_bot.set_sleep_time(int(messaging_event['message']['text']))
 
                        
