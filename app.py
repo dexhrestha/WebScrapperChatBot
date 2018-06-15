@@ -32,6 +32,9 @@ def verify_webhook():
         print("Verfiy")
     return "Hello world",200
 
+@app.route('/show',methods=['GET'])
+def show():
+    return 'Show me',200
 
 @app.route('/',methods=['POST'])
 def webhook():

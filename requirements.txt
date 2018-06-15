@@ -16,8 +16,10 @@ pymessenger==0.0.7.0
 python-dateutil==2.7.3
 python-firebase==1.2
 pytz==2018.4
+redis==2.10.6
 requests==2.18.4
 requests-toolbelt==0.8.0
+rq==0.11.0
 six==1.11.0
 urllib3==1.22
 wcwidth==0.1.7

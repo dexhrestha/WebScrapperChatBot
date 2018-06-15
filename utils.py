@@ -37,6 +37,19 @@ class ioeBot:
         result = self.firebase.get('/sender',None)
         return result
 
+    def get_sleep_time(self):
+        # result = self.firebase.get('/sleep',None)
+        result=20
+        return result
+        
+    def get_prev_notice(self):
+        result = self.firebase.get('/notice',None)
+        return result
+
+    def save_new_notice(self,notice):
+        result = self.firebase.put('/notice','-LF1sU538Jg9JyVQ_Nfs',notice)
+        return result
+
     def save_sender_id(self):
         print("***********SENDERID****************")
         print(self.sender_id)
@@ -107,14 +120,8 @@ class ioeBot:
                 "type":"postback",
                 "title":"Start Chatting",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD"
-              }              
-            ]      
-          }
-        ]
-      }
-    }
-  }
-}
+              }]}]}}}}
+              
         r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token='+PAGE_ACCESS_TOKEN,json=payload)        
         return r.json()
 
