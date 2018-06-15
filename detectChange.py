@@ -20,12 +20,13 @@ site = "http://exam.ioe.edu.np/?page="
 sched = BlockingScheduler()
 
 sleep_time = ioe_bot.get_sleep_time()
-new_notice_title = "haha "
-new_notice_file = "asdfasd"
-subscribers_list = []
 
 def send_notice():
     # print('send NOTICEEEEEEEEEE')
+    subscribers_list=ioe_bot.get_subscribers()
+    now_top_notice,_ = to_json(site,1)
+    new_notice_title = now_top_notice[0]['title']
+    new_notice_fiel = now_top_notice[0]['file']
     print(subscribers_list)
     print(new_notice_file)
     print(new_notice_title)
@@ -53,20 +54,10 @@ def send_notice():
 def detectChange():
     try:
         prev_top_notice = ioe_bot.get_prev_notice()
-        # print(prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'])
         now_top_notice,_ = to_json(site,1)
-        # print(now_top_notice[0]['title'])
-        # new_notice_title = now_top_notice[0]['title']
-        # new_notice_file = now_top_notice[0]['file']
-        print(type(now_top_notice[0]['title']))
         subscribers_list=ioe_bot.get_subscribers()
-        # print(subscribers_list)
-            # ioe_bot.send_quick_replies('notice',['1','2'])
-            # print(ioebot.get_sender())
-            # print(x)
-            # result = bot.send_text_message(x,'notice')
         if prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'] != now_top_notice[0]['title']:
-            #messenger sends message to all
+            #messenger sends message to all subscribers
             print("change")
             send_notice()
             ioe_bot.save_new_notice(now_top_notice[0])
@@ -75,7 +66,6 @@ def detectChange():
         # print(prev_top_notice['title'])
         else:
             print("equal")
-       
         # time.sleep(20)
     except Exception as e:
         print('Exception:'+str(e))
