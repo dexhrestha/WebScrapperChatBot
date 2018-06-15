@@ -73,5 +73,6 @@ def detectChange():
 @sched.scheduled_job('interval',minutes=sleep_time)
 def time_job():
     print('Run every'+str(sleep_time)+'minutes')
+    detectChange()
 
 sched.start()
