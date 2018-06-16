@@ -22,7 +22,7 @@ bot = Bot(PAGE_TOKEN)
 def verify_webhook():
     #Webhook Verification
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if notf request.args.get("hub.verify_token") == "ioeBot":
+        if not request.args.get("hub.verify_token") == "ioeBot":
             return "Verification token Mismatch" , 403
         return request.args["hub.challenge"],200
         print("Verfiy")
