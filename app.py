@@ -61,7 +61,7 @@ def webhook():
                     categories = ioe_bot.get_message_response(messaging_text)
                     print("categories:")
                     print(categories)
-                    if categories['numbers'] !=None and sender_id == '1928179273867668' :
+                    if categories['number'] !=None and sender_id == '1928179273867668' :
                         try:
                             if int(messaging_text) > 0:
                                ioe_bot.set_sleep_time(int(messaging_text))
