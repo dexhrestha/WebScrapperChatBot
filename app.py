@@ -13,9 +13,6 @@ app = Flask(__name__)
 
 bot = Bot(PAGE_TOKEN)
 
-
-
-
 state={'subscribe':False,'unsubscribe':False}
 # START=datetime.datetime.now
 # print(START)
