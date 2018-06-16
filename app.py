@@ -42,7 +42,7 @@ def webhook():
     # log(data)
     # state=ioe_bot.get_state()
 
-    log(state)
+    # log(state)
     messaging_text = ""
     if data['object'] == 'page':
         for entry in data['entry']:
