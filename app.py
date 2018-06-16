@@ -13,10 +13,8 @@ app = Flask(__name__)
 
 bot = Bot(PAGE_TOKEN)
 
-state={'subscribe':False,'unsubscribe':False}
 # START=datetime.datetime.now
 # print(START)
-
 # if(START-datetime.datetime.now==20):
 #     detectChange()
 
@@ -24,7 +22,7 @@ state={'subscribe':False,'unsubscribe':False}
 def verify_webhook():
     #Webhook Verification
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == "ioeBot":
+        if notf request.args.get("hub.verify_token") == "ioeBot":
             return "Verification token Mismatch" , 403
         return request.args["hub.challenge"],200
         print("Verfiy")
@@ -78,35 +76,26 @@ def webhook():
                     elif categories['greetings'] != None:
                         bot.send_text_message(sender_id,'Hello. Its such a beautiful day')
                     elif categories['unsubscribe'] !=None:
-                        state['unsubscribe']=True
+                        
                         res=ioe_bot.save_sender_id()
                         if not res:
                             result = bot.send_text_message(sender_id,'Thank you. Do send us feedback.')
                             # remove from database ioe_bot.remove_sender_id()
                         else:
-                            result = bot.send_text_message(sender_id,'You have not subscribed!!Would you like to Subscribe?')
-                            state['subscribe']=True
+                            result = bot.send_text_message(sender_id,'You have not subscribed yet')
+                            ioe_bot.send_quick_replies('Would you like to subscribe?',['subscribe now'])
+                            
                     elif categories['help'] != None:
-                        result = bot.send_text_message(sender_id,'Hello I am IOEbot . I will send you latest notice from IOE. Would you like to Subscribe?')
-                        state['subscribe']=True
-                             
+                        result = bot.send_text_message(sender_id,'Hello I am IOEbot . I will send you latest notice from IOE.')
+                        ioe_bot.send_quick_replies('Would you like to subscribe?',['subscribe now'])
                     else:
                         bot.send_text_message(sender_id,'Sorry i did not get that . Type help for Help')
 
-                    if state['subscribe']:
-                        print('subscribe')
-                        if messaging_text=='yes' or messaging_text=='Yes':
-
-                            categories['subscribe']=True
-                        elif messaging_text=='no' or messaging_text=='no':
-                            bot.send_text_message(sender_id,'Type Subscribe to subscribe any time.')
-
-                    
                 if messaging_event.get('postback'):
                     if (messaging_event['postback']['payload']=='firsthandshake'):
                         get_started_text='Hello Hello I am IOEbot . I will send you latest notice from IOE. Would you like to Subscribe?'
-                        state['subscribe']=True
-                        result = bot.send_text_message(sender_id,get_started_text) 
+                        result = bot.send_text_message(sender_id,get_started_text)
+                    # if (messaging_event['postback'][]) 
 
     return "ok",200
 
