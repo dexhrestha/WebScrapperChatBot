@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 bot = Bot(PAGE_TOKEN)
 
-state={'subscribe':False,'unsubscribe':False}
+
 
 
 # START=datetime.datetime.now
@@ -40,6 +40,8 @@ def show():
 def webhook():
     data = request.get_json()
     # log(data)
+    state=ioe_bot.get_state()
+
     log(state)
     messaging_text = ""
     if data['object'] == 'page':
@@ -94,9 +96,11 @@ def webhook():
                         bot.send_text_message(sender_id,'Sorry i did not get that . Type help for Help')
 
                     if state['subscribe']:
-                        if categories['yes'] != None:
+                        print('subscribe')
+                        if messaging_text=='yes' or messaging_text=='Yes':
+
                             categories['subscribe']=True
-                        elif categories['no'] !=None:
+                        elif messaging_text=='no' or messaging_text=='no':
                             bot.send_text_message(sender_id,'Type Subscribe to subscribe any time.')
 
                     
