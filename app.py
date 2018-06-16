@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 bot = Bot(PAGE_TOKEN)
 
-print('apple')
+state={'subscribe':False}
 
 
 # START=datetime.datetime.now
@@ -54,33 +54,54 @@ def webhook():
 
                         messaging_text=messaging_event['message']['text']
                         # if(sender_id=ADMIN_SENDER_ID and )
-                        result = bot.send_text_message(sender_id,messaging_text)
-                        try:
-                            if sender_id == '1928179273867668' and int(messaging_event['message']['text'])>1:
-                                ioe_bot.set_sleep_time(int(messaging_event['message']['text']))
-                        except:
-                            pass
-
-                       
+                        # result = bot.send_text_message(sender_id,messaging_text)                       
                     else:
                         messaging_text='Not a text'
                     
                     categories = ioe_bot.get_message_response(messaging_text)
                     print("categories:")
                     print(categories)
-                    if categories['subscribe'] != None:
+                    if categories['numbers'] !=None and sender_id == '1928179273867668' :
+                        try:
+                            if int(messaging_text) > 0:
+                               ioe_bot.set_sleep_time(int(messaging_text))
+                        except Exception as e:
+                            print(e)
+                        
+                    elif categories['subscribe'] != None:
                         res = ioe_bot.save_sender_id()
-                        print('res')
-                        print(res)
                         if res:
-                            print('res2')
+                            
                             result = bot.send_text_message(sender_id,'Thank you for your subscription,'+ioe_bot.get_user_name()+'!')
                         else:
                             result = bot.send_text_message(sender_id,ioe_bot.get_user_name()+', you have already subscribed!! Thank you!!')
-                            
+                    elif categories['unsubscribe'] !=None:
+                        state['unsubscribe']=True
+                        res=ioe_bot.save_sender_id()
+                        if not res:
+                            result = bot.send_text_message(sender_id,'Thank you. Do send us feedback.')
+                            # remove from database ioe_bot.remove_sender_id()
+                        else:
+                            result = bot.send_text_message(sender_id,'You have not subscribed!!Would you like to Subscribe?')
+                            state['subscribe']=True
+                    elif categories['help'] != None:
+                        result = bot.send_text_message(sender_id,'Hello I am IOEbot . I will send you latest notice from IOE. Would you like to Subscribe?')
+                        state['subscribe']=True
+                             
+                    else:
+                        bot.send_text_message(sender_id,'Sorry i did not get that . Type help for Help')
+
+                    if state['subscribe']:
+                        if categories['Yes'] != None:
+                            categories['subscribe']=True
+                        elif categories['No'] !=None:
+                            bot.send_text_message(sender_id,'Type Subscribe to subscribe any time.')
+
+                    
                 if messaging_event.get('postback'):
                     if (messaging_event['postback']['payload']=='firsthandshake'):
-                        get_started_text='Hello would you like to subscribe?'
+                        get_started_text='Hello Hello I am IOEbot . I will send you latest notice from IOE. Would you like to Subscribe?'
+                        state['subscribe']=True
                         result = bot.send_text_message(sender_id,get_started_text) 
 
     return "ok",200
