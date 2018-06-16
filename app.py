@@ -40,7 +40,7 @@ def show():
 def webhook():
     data = request.get_json()
     # log(data)
-    state=ioe_bot.get_state()
+    # state=ioe_bot.get_state()
 
     log(state)
     messaging_text = ""
