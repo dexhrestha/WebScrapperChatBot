@@ -19,7 +19,7 @@ class ioeBot:
         entity = None
         value = None
         entities = list(response['entities'])
-        categories = {'subscribe':None,'greetings':None,'unsubscribe':None,'help':None,'number':None,'Yes':None,'No':None}
+        categories = {'subscribe':None,'greetings':None,'unsubscribe':None,'help':None,'number':None,'yes':None,'no':None}
         for entity in entities:
             categories[entity] = response['entities'][entity][0]['value']
         return categories

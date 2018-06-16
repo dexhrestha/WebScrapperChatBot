@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 bot = Bot(PAGE_TOKEN)
 
-state={'subscribe':False}
+state={'subscribe':False,'unsubscribe':False}
 
 
 # START=datetime.datetime.now
@@ -94,9 +94,9 @@ def webhook():
                         bot.send_text_message(sender_id,'Sorry i did not get that . Type help for Help')
 
                     if state['subscribe']:
-                        if categories['Yes'] != None:
+                        if categories['yes'] != None:
                             categories['subscribe']=True
-                        elif categories['No'] !=None:
+                        elif categories['no'] !=None:
                             bot.send_text_message(sender_id,'Type Subscribe to subscribe any time.')
 
                     
