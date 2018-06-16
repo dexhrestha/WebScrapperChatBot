@@ -72,6 +72,7 @@ def detectChange():
 
 @sched.scheduled_job('interval',minutes=sleep_time)
 def time_job():
+	sleep_time = ioe_bot.get_sleep_time()['ssss']
     print(sleep_time)
     print('Run every'+str(sleep_time)+'minutes')
     detectChange()
