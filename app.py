@@ -75,6 +75,8 @@ def webhook():
                             result = bot.send_text_message(sender_id,'Thank you for your subscription,'+ioe_bot.get_user_name()+'!')
                         else:
                             result = bot.send_text_message(sender_id,ioe_bot.get_user_name()+', you have already subscribed!! Thank you!!')
+                    elif categories['greetings'] != None:
+                        bot.send_text_message(sender_id,'Hello. Its such a beautiful day')
                     elif categories['unsubscribe'] !=None:
                         state['unsubscribe']=True
                         res=ioe_bot.save_sender_id()
