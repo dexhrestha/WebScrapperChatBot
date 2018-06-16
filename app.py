@@ -39,8 +39,8 @@ def show():
 @app.route('/',methods=['POST'])
 def webhook():
     data = request.get_json()
-    log(data)
-
+    # log(data)
+    log(state)
     messaging_text = ""
     if data['object'] == 'page':
         for entry in data['entry']:
