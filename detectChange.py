@@ -19,8 +19,6 @@ site = "http://exam.ioe.edu.np/?page="
 
 sched = BlockingScheduler()
 
-sleep_time = ioe_bot.get_sleep_time()['ssss']
-
 def send_notice():
     # print('send NOTICEEEEEEEEEE')
     subscribers_list=ioe_bot.get_subscribers()
@@ -52,6 +50,7 @@ def send_notice():
             print(result)
 
 def detectChange():
+
     try:
         prev_top_notice = ioe_bot.get_prev_notice()
         now_top_notice,_ = to_json(site,1)
@@ -66,20 +65,19 @@ def detectChange():
         # print(prev_top_notice['title'])
         else:
             print("equal")
-        # time.sleep(20)
+        
     except Exception as e:
         print('Exception:'+str(e))
 
-@sched.scheduled_job('interval',minutes=sleep_time)
+def get_scheduler(s=sched):
+	return s;
+
+@sched.scheduled_job('interval',minutes=60)
 def time_job():
-	sleep_time = ioe_bot.get_sleep_time()['ssss']
-	bot.send_text_message('1928179273867668','Sleep time:'+str(sleep_time))
-	print('Run every'+str(sleep_time)+'minutes')
-	detectChange()
+	print('Run every'+str(60)+'minutes')
+	while True:
+		detectChange()
+		time.sleep(int(bot.get_sleep_time()['ssss']))
+		bot.send_text_message('1928179273867668',str(bot.get_sleep_time()['ssss'])+' slept')
 
 sched.start()
-
-
-# while (True):
-    # result=bot.send_text_message('1146926505415196','loop')
-    # print(result)
