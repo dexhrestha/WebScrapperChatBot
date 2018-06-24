@@ -1,2 +1,2 @@
 web: gunicorn app:app 
-clock: python detectChange.py 
+clock: python clo.py 
