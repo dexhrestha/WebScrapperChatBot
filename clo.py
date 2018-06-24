@@ -1,1 +1,5 @@
-print("easdas;dfljaksldfj;asdlf")
+import time
+
+while(True):
+	print('asdfasd')
+	time.sleep(10)
