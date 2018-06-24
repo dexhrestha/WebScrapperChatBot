@@ -69,15 +69,20 @@ def detectChange():
     except Exception as e:
         print('Exception:'+str(e))
 
-def get_scheduler(s=sched):
-	return s;
+# def get_scheduler(s=sched):
+	# return s;
 
-@sched.scheduled_job('interval',minutes=60)
-def time_job():
-	print('Run every'+str(60)+'minutes')
-	while True:
-		detectChange()
-		time.sleep(int(bot.get_sleep_time()['ssss']))
-		bot.send_text_message('1928179273867668',str(bot.get_sleep_time()['ssss'])+' slept')
+# @sched.scheduled_job('interval',minutes=60)
+# def time_job():
+# 	print('Run every'+str(60)+'minutes')
+# 	while True:
+# 		detectChange()
+# 		time.sleep(int(bot.get_sleep_time()['ssss']))
+# 		bot.send_text_message('1928179273867668',str(bot.get_sleep_time()['ssss'])+' slept')
 
-sched.start()
+# sched.start()
+
+
+while(True):
+	detectChange()
+	time.sleep(int(bot.get_sleep_time()['ssss']))
