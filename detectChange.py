@@ -85,4 +85,4 @@ def detectChange():
 
 while(True):
 	detectChange()
-	time.sleep(int(ioe_bot.get_sleep_time()['ssss']))
+	time.sleep(int(ioe_bot.get_sleep_time()))
