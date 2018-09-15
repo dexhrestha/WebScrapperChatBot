@@ -38,7 +38,7 @@ class ioeBot:
         return result
 
     def get_sleep_time(self):
-        result = self.firebase.get('/sleep',None)
+        result = self.firebase.get('/sleep/ssss',None)
         # result=2
         return result
 
