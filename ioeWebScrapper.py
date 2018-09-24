@@ -14,21 +14,22 @@ def get_notices(site,page_no):
     p=1
     while p<=page_no:
         dsite=site+str(p)
-        print(dsite)
+        # dsite = main_site
+        print('main_site '+dsite)
         try:
             page = urllib2.urlopen(dsite)
 
             soup = BeautifulSoup(page,"html.parser")
-
-            for notice in soup.table.find_all('tr')[1:]:
+            tables = soup.find_all('table')[1]
+            for notice in tables.find_all('tr')[1:]:            
                 notice = notice.find_all('td')[1].contents
                 notices_links.append(notice[0]['href'])
                 notices_text.append(notice[0].contents[0])
             
-##            df_notices = pd.DataFrame(notices_td,columns=["Notices"])
+    ##            df_notices = pd.DataFrame(notices_td,columns=["Notices"])
 
-##            for notice in df_notices['Notices']:
-##                notices_text.append(notice.contents[0])
+    ##            for notice in df_notices['Notices']:
+    ##                notices_text.append(notice.contents[0])
             p=p+1
             
         except:
@@ -58,7 +59,7 @@ def get_json(site,page_no):
 
 
 
-
+# print(get_notices(site,1))
 
 
 

@@ -59,7 +59,7 @@ def detectChange():
             #messenger sends message to all subscribers
             print("change")
             send_notice()
-            ioe_bot.save_new_notice(now_top_notice[0])
+            oe_bot.save_new_notice(now_top_notice[0])
             # print(now_top_notice[0])
             pass
         # print(prev_top_notice['title'])
@@ -83,6 +83,6 @@ def detectChange():
 # sched.start()
 
 
-while(True):
-	detectChange()
-	time.sleep(int(ioe_bot.get_sleep_time()))
+# while(True):
+detectChange()
+	# time.sleep(int(ioe_bot.get_sleep_time()))
