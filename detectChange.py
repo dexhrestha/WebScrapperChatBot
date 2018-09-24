@@ -83,6 +83,6 @@ def detectChange():
 # sched.start()
 
 
-# while(True):
-detectChange()
-	# time.sleep(int(ioe_bot.get_sleep_time()))
+while(True):
+    detectChange()
+	time.sleep(int(ioe_bot.get_sleep_time()))
