@@ -32,11 +32,6 @@ def verify_webhook():
 def show():
     return 'Show me',200
 
-@app.route('/subscribe',methods=['POST']):
-def addSubscribers():
-    data = request.get_json()
-    print(data)
-
 @app.route('/',methods=['POST'])
 def webhook():
     data = request.get_json()
