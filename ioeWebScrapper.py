@@ -20,7 +20,7 @@ def get_notices(site,page_no):
             page = urllib2.urlopen(dsite)
 
             soup = BeautifulSoup(page,"html.parser")
-            tables = soup.find_all('table')[0]
+            tables = soup.find('table',id='datatable')
             for notice in tables.find_all('tr')[1:]:            
                 notice = notice.find_all('td')[1].contents
                 notices_links.append(notice[0]['href'])
