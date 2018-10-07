@@ -13,7 +13,7 @@ class ioeBot:
         self.firebase = firebase.FirebaseApplication(MY_DB)
         self.sender_id = sender_id
         self.fname = None
-        
+
     def get_message_response(self,message):
         response = self.client.message(message)
         entity = None
@@ -70,18 +70,18 @@ class ioeBot:
                 return True
             else:
                 return False
-                    
+
         else:
             payload={'id':self.sender_id,'fname':self.get_user_name()}
             result = self.firebase.post('/sender',payload)
             print(result)
-                
+
     def get_subscribers(self):
         result=self.firebase.get('/sender',None)
 
         subscribers_list=[]
         for x in result:
-            if(result[x]['fname']!='' and result[x]['fname']!=None):                
+            if(result[x]['id']!='' and result[x]['id']!=None):                
                 subscribers_list.append(result[x]['id'])
 
         return subscribers_list
@@ -125,8 +125,8 @@ class ioeBot:
                 "title":"Start Chatting",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD"
               }]}]}}}}
-              
-        r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token='+PAGE_ACCESS_TOKEN,json=payload)        
+
+        r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token='+PAGE_ACCESS_TOKEN,json=payload)
         return r.json()
 
     def send_quick_replies(self,text,quick_replies):
@@ -142,6 +142,6 @@ class ioeBot:
                         'title':quick_reply,
                         'payload':'<POSTBACK_PAYLOAD>'
                         })
-        
-        r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token='+PAGE_ACCESS_TOKEN,json=payload) 
+
+        r = requests.post('https://graph.facebook.com/v2.6/me/messages/?access_token='+PAGE_ACCESS_TOKEN,json=payload)
         return r.json()
