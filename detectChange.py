@@ -29,8 +29,6 @@ def send_notice():
 
     for x in subscribers_list:
         # ioe_bot = ioeBot(x)
-        url = MAIN_URL.format(x)
-        print(url)
         content={
             "noticeTitle":new_notice_title,
             "noticeUrl":new_notice_file
