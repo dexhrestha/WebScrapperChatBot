@@ -38,16 +38,19 @@ def subscribe(id):
     ioe_bot = ioeBot(id)
     res = ioe_bot.save_sender_id()
     if res:
-        result = bot.send_text_message(sender_id,'Thank you for your subscription,'+ioe_bot.get_user_name()+'!')
+        response = json.dumps({
+         "messages": [
+           {"text": "Thank you for your subscription {{ first name }}"},
+         ]
+        })
     else:
-        result = bot.send_text_message(sender_id,ioe_bot.get_user_name()+', you have already subscribed!! Thank you!!')
+        response = json.dumps({
+         "messages": [
+           {"text": "You have already subscribed {{ first name }}"},
+         ]
+        })
 
     # print(request.args['messenger user id'])
-    response = json.dumps({
-     "messages": [
-       {"text": "Thank you for your subscription {{ first name }}"},
-     ]
-    })
     return response,200
 
 @app.route('/',methods=['POST'])
