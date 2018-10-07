@@ -7,7 +7,8 @@ import time
 import requests
 
 PAGE_TOKEN = open('token.txt','r').readline()
-MAIN_URL = "https://api.chatfuel.com/bots/5bb8ab8a76ccbc7dfccb5d23/users/{0}/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_block_name=Notice&noticeTitle={1}&noticeUrl={2}"
+MAIN_URL = "https://api.chatfuel.com/bots/5bb8ab8a76ccbc7dfccb5d23/users/{0}/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_block_name=Notice"
+#"&noticeTitle={1}&noticeUrl={2}"
 bot = Bot(PAGE_TOKEN)
 
 ioe_bot = ioeBot()
@@ -27,9 +28,15 @@ def send_notice():
     print('New title',new_notice_title)
 
     for x in subscribers_list:
-            # ioe_bot = ioeBot(x)
-            result = requests.post(MAIN_URL.format(x,new_notice_title,new_notice_file))
-            print(result)
+        # ioe_bot = ioeBot(x)
+        url = MAIN_URL.format(x)
+        print(url)
+        content={
+            "noticeTitle":new_notice_title,
+            "noticeUrl":new_notice_file
+        }
+        result = requests.post(url,json=content)
+        print(result)
 
 def detectChange():
 
