@@ -37,6 +37,11 @@ def show():
 def subscribe(id):
     ioe_bot = ioeBot(id)
     res = ioe_bot.save_sender_id()
+    if res:
+        result = bot.send_text_message(sender_id,'Thank you for your subscription,'+ioe_bot.get_user_name()+'!')
+    else:
+        result = bot.send_text_message(sender_id,ioe_bot.get_user_name()+', you have already subscribed!! Thank you!!')
+
     # print(request.args['messenger user id'])
     response = json.dumps({
      "messages": [
