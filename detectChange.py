@@ -7,7 +7,7 @@ import time
 import requests
 
 PAGE_TOKEN = open('token.txt','r').readline()
-
+MAIN_URL = "https://api.chatfuel.com/bots/5bb8ab8a76ccbc7dfccb5d23/users/{0}/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_block_name=Notice&noticeTitle={1}&noticeUrl={2}"
 bot = Bot(PAGE_TOKEN)
 
 ioe_bot = ioeBot()
