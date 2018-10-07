@@ -16,8 +16,6 @@ main_site = "http://exam.ioe.edu.np"
 
 site = "http://exam.ioe.edu.np/?page="
 
-sched = BlockingScheduler()
-
 def send_notice():
     # print('send NOTICEEEEEEEEEE')
     subscribers_list=ioe_bot.get_subscribers()
