@@ -4,14 +4,13 @@ from ioeWebScrapper import to_json
 from utils import ioeBot
 from pymessenger import Bot
 import time
-import redis
-from apscheduler.schedulers.blocking import BlockingScheduler
+import requests
 
 PAGE_TOKEN = open('token.txt','r').readline()
 
 bot = Bot(PAGE_TOKEN)
 
-ioe_bot = ioeBot()    
+ioe_bot = ioeBot()
 
 main_site = "http://exam.ioe.edu.np"
 
@@ -28,25 +27,10 @@ def send_notice():
     print('Subscribers:',subscribers_list)
     print('New notice:',new_notice_file)
     print('New title',new_notice_title)
-    elements = [{'title':'Notice',
-                        'subtitle':new_notice_title,
-                        'default_action':{
-                            'type': 'web_url',
-                            'url': new_notice_file,
-                            "messenger_extensions": "false",
-                            'webview_height_ratio': 'tall',
-                        },
-                        'buttons':[{                                                                
-                            'type':'web_url',
-                            'url':'https://exam.ioe.edu.np',
-                            'title':'View website'
-                             }],
-                        'image_url' : 'https://cdn.pixabay.com/photo/2017/02/10/17/11/table-2055700_960_720.jpg'
-                        }]
 
     for x in subscribers_list:
             # ioe_bot = ioeBot(x)
-            result = bot.send_generic_message(x,elements)
+            result = requests.post(MAIN_URL.format(x,new_notice_title,new_notice_file))
             print(result)
 
 def detectChange():
@@ -65,23 +49,9 @@ def detectChange():
         # print(prev_top_notice['title'])
         else:
             print("equal")
-        
+
     except Exception as e:
         print('Exception:'+str(e))
-
-# def get_scheduler(s=sched):
-	# return s;
-
-# @sched.scheduled_job('interval',minutes=60)
-# def time_job():
-# 	print('Run every'+str(60)+'minutes')
-# 	while True:
-# 		detectChange()
-# 		time.sleep(int(bot.get_sleep_time()['ssss']))
-# 		bot.send_text_message('1928179273867668',str(bot.get_sleep_time()['ssss'])+' slept')
-
-# sched.start()
-
 
 while(True):
     detectChange()
