@@ -33,9 +33,9 @@ def verify_webhook():
 def show():
     return 'Show me',200
 
-@app.route('/subscribe/<id>',methods=['GET'])
-def subscribe(id):
-    ioe_bot = ioeBot(id)
+@app.route('/subscribe/<id>/<name>',methods=['GET'])
+def subscribe(id,name):
+    ioe_bot = ioeBot(sender_id=id,fname=name)
     res = ioe_bot.save_sender_id()
     if res:
         response = json.dumps({
