@@ -8,7 +8,7 @@ MY_DB = "https://website-scrapper-bot.firebaseio.com/"
 
 #create Wit object
 class ioeBot:
-    def __init__(self,sender_id=0):
+    def __init__(self,sender_id=0,fname=None):
         self.client = Wit(ACCESS_TOKEN)
         self.firebase = firebase.FirebaseApplication(MY_DB)
         self.sender_id = sender_id
@@ -81,7 +81,7 @@ class ioeBot:
 
         subscribers_list=[]
         for x in result:
-            if(result[x]['id']!='' and result[x]['id']!=None):                
+            if(result[x]['id']!='' and result[x]['id']!=None):
                 subscribers_list.append(result[x]['id'])
 
         return subscribers_list
