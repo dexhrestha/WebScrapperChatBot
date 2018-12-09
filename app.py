@@ -37,8 +37,20 @@ def show():
 def poll(time,id):
     if id == '1700919643353534':
         ioe_bot = ioeBot(sender_id=id)
-        ioe_bot.set_sleep_time(time)
-
+        res = ioe_bot.set_sleep_time(time)
+    if res:
+        response = json.dumps({
+         "messages": [
+           {"text": "Time set to {0}".format(time)},
+         ]
+        })
+    else:
+        response = json.dumps({
+         "messages": [
+           {"text": "Unable to set time"}
+         ]
+        })
+    return response,200
 
 @app.route('/subscribe/<id>/<name>',methods=['GET'])
 def subscribe(id,name):
