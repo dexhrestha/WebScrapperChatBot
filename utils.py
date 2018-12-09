@@ -64,7 +64,7 @@ class ioeBot:
             for x in result.values():
                 db_id.append(x['id'])
             if self.sender_id not in db_id:
-                payload={'id':self.sender_id,'fname':self.get_user_name()}
+                payload={'id':self.sender_id,'fname':self.fname}
                 result = self.firebase.post('/sender',payload)
                 print(result)
                 return True
@@ -72,7 +72,7 @@ class ioeBot:
                 return False
 
         else:
-            payload={'id':self.sender_id,'fname':self.get_user_name()}
+            payload={'id':self.sender_id,'fname':self.fname}
             result = self.firebase.post('/sender',payload)
         return result
 
