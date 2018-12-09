@@ -33,10 +33,17 @@ def verify_webhook():
 def show():
     return 'Show me',200
 
+@app.route('/poll/<time>/<id>',methods=['GET'])
+def poll(time,id):
+    if id == '1700919643353534':
+        ioe_bot = ioeBot(sender_id=id)
+        ioe_bot.set_sleep_time(time)
+
+
 @app.route('/subscribe/<id>/<name>',methods=['GET'])
 def subscribe(id,name):
     ioe_bot = ioeBot(sender_id=id,fname=name)
-    print(id)
+    # print(id)
     res = ioe_bot.save_sender_id()
     if res:
         response = json.dumps({
