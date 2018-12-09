@@ -107,7 +107,7 @@ class ioeBot:
         "elements":[
            {
             "title":"Welcome!",
-            "image_url":""
+            "image_url":"",
             "subtitle":"We have the right hat for everyone.",
             "default_action": {
               "type": "web_url",
