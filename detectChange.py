@@ -1,3 +1,4 @@
+
 import urllib.request as urllib2
 from bs4 import BeautifulSoup
 from ioeWebScrapper import to_json
@@ -7,7 +8,7 @@ import time
 import requests
 
 PAGE_TOKEN = open('token.txt','r').readline()
-MAIN_URL = "https://api.chatfuel.com/bots/5bb8ab8a76ccbc7dfccb5d23/users/{0}/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_block_name=Notice"
+MAIN_URL = "https://api.chatfuel.com/bots/5bbd658876ccbc2d050ff23a/users/{0}/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_block_name=Notice"
 #"&noticeTitle={1}&noticeUrl={2}"
 bot = Bot(PAGE_TOKEN)
 
@@ -33,7 +34,7 @@ def send_notice():
             "noticeTitle":new_notice_title,
             "noticeUrl":new_notice_file
         }
-        result = requests.post(url,json=content)
+        result = requests.post(MAIN_URL,json=content)
         print(result)
 
 def detectChange():

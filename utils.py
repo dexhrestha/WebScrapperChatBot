@@ -74,7 +74,7 @@ class ioeBot:
         else:
             payload={'id':self.sender_id,'fname':self.get_user_name()}
             result = self.firebase.post('/sender',payload)
-            print(result)
+        return result
 
     def get_subscribers(self):
         result=self.firebase.get('/sender',None)

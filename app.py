@@ -36,6 +36,7 @@ def show():
 @app.route('/subscribe/<id>/<name>',methods=['GET'])
 def subscribe(id,name):
     ioe_bot = ioeBot(sender_id=id,fname=name)
+    print(id)
     res = ioe_bot.save_sender_id()
     if res:
         response = json.dumps({
