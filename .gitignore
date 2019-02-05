@@ -5,4 +5,5 @@ premier.py
 server.csr
 server.key
 server.pass.key
-
+token.txt
+ngrok.exe
