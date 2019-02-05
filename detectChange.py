@@ -43,6 +43,7 @@ def detectChange():
         now_top_notice,_ = to_json(site,1)
         subscribers_list=ioe_bot.get_subscribers()
         prev_title = ioe_bot.get_prev_notice()['-LF1sU538Jg9JyVQ_Nfs']['title'] 
+        find_prev_notice_pos(prev_title,now_notice)
         if prev_title != now_top_notice[0]['title']:
             #messenger sends message to all subscribers
             print("change")
