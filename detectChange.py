@@ -42,13 +42,14 @@ def detectChange():
         now_top_notice,_ = to_json(site,1)
         subscribers_list=ioe_bot.get_subscribers()
         prev_title = ioe_bot.get_prev_notice()['-LF1sU538Jg9JyVQ_Nfs']['title']
-        no_of_new_notices = find_prev_notice_pos(prev_title,now_top_notice)
+        no_of_new_notices = find_prev_notice_pos('Re-totaling Result : M.Sc. I/I & II/I - Exam held on 2075 Bhadra',now_top_notice)
+        print(no_of_new_notices)
         for x in range(no_of_new_notices):
         	send_notice(now_top_notice[x]) 
         if prev_title != now_top_notice[0]['title']:
             #messenger sends message to all subscribers
             print("change")
-            no_of_new_notices = find_prev_notice_pos('Re-totaling Result : M.Sc. I/I & II/I - Exam held on 2075 Bhadra',now_top_notice)
+            no_of_new_notices = find_prev_notice_pos(prev_title,now_top_notice)
             for x in range(no_of_new_notices):
             	send_notice(now_top_notice[x])
             ioe_bot.save_new_notice(now_top_notice[0])
