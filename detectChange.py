@@ -18,41 +18,39 @@ main_site = "http://exam.ioe.edu.np"
 
 site = "http://exam.ioe.edu.np/?page="
 
-def send_notice():
+def send_notice(now_top_notice):
     # print('send NOTICEEEEEEEEEE')
     subscribers_list=ioe_bot.get_subscribers()
-    now_top_notice,_ = to_json(site,1)
-    new_notice_title = now_top_notice[0]['title']
-    new_notice_file = now_top_notice[0]['file']
-    print('Subscribers:',subscribers_list)
+    new_notice_title = now_top_notice['title']
+    new_notice_file = now_top_notice['file']
     print('New notice:',new_notice_file)
     print('New title',new_notice_title)
-
+    ## broadcast to subsribers
     for x in subscribers_list:
         # ioe_bot = ioeBot(x)
         content={
             "noticeTitle":new_notice_title,
             "noticeUrl":new_notice_file
         }
-        result = requests.post(MAIN_URL.format(x),json=content)
-        print(result)
+        #result = requests.post(MAIN_URL.format(x),json=content)
+        print(content)
+        break
 
 def detectChange():
 
     try:
         now_top_notice,_ = to_json(site,1)
         subscribers_list=ioe_bot.get_subscribers()
-        prev_title = ioe_bot.get_prev_notice()['-LF1sU538Jg9JyVQ_Nfs']['title'] 
-        no_of_new_notices = find_prev_notice_pos('Result : BE/BArch II/I (B) - Exam held on 2075 Ashwin',now_top_notice)
+        prev_title = ioe_bot.get_prev_notice()['-LF1sU538Jg9JyVQ_Nfs']['title']
+        no_of_new_notices = find_prev_notice_pos(prev_title,now_top_notice)
         for x in range(no_of_new_notices):
-        	print(now_top_notice[x])
+        	send_notice(now_top_notice[x]) 
         if prev_title != now_top_notice[0]['title']:
             #messenger sends message to all subscribers
             print("change")
             no_of_new_notices = find_prev_notice_pos(prev_title,now_top_notice)
             for x in range(no_of_new_notices):
             	send_notice(now_top_notice[x])
-#            send_notice()
             ioe_bot.save_new_notice(now_top_notice[0])
             # print(now_top_notice[0])
             pass
