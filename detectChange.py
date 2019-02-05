@@ -60,7 +60,7 @@ def detectChange():
         print('Exception:'+str(e))
 def find_prev_notice_pos(prev_title,now_notice):
 	for i,x in enumerate(now_notice):
-		if x['title'] = prev_title:
+		if x['title'] == prev_title:
 			return i	
 	
 while(True):
