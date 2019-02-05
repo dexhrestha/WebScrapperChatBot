@@ -40,12 +40,14 @@ def send_notice():
 def detectChange():
 
     try:
-        prev_top_notice = ioe_bot.get_prev_notice()
         now_top_notice,_ = to_json(site,1)
         subscribers_list=ioe_bot.get_subscribers()
-        if prev_top_notice['-LF1sU538Jg9JyVQ_Nfs']['title'] != now_top_notice[0]['title']:
+        prev_title = ioe_bot.get_prev_notice()['-LF1sU538Jg9JyVQ_Nfs']['title'] 
+        if prev_title != now_top_notice[0]['title']:
             #messenger sends message to all subscribers
             print("change")
+            prev_notice_pos = find_prev_notice_pos(prev_title,now_notice)
+            print(prev_notice_pos-1)	
             send_notice()
             ioe_bot.save_new_notice(now_top_notice[0])
             # print(now_top_notice[0])
@@ -56,7 +58,11 @@ def detectChange():
 
     except Exception as e:
         print('Exception:'+str(e))
-
+def find_prev_notice_pos(prev_title,now_notice):
+	for i,x in enumerate(now_notice):
+		if x['title'] = prev_title:
+			return i	
+	
 while(True):
     detectChange()
     time.sleep(int(ioe_bot.get_sleep_time()))
