@@ -48,7 +48,7 @@ def detectChange():
         if prev_title != now_top_notice[0]['title']:
             #messenger sends message to all subscribers
             print("change")
-            no_of_new_notices = find_prev_notice_pos(prev_title,now_top_notice)
+            no_of_new_notices = find_prev_notice_pos('Re-totaling Result : M.Sc. I/I & II/I - Exam held on 2075 Bhadra',now_top_notice)
             for x in range(no_of_new_notices):
             	send_notice(now_top_notice[x])
             ioe_bot.save_new_notice(now_top_notice[0])
