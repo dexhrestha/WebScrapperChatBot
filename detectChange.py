@@ -3,14 +3,13 @@ import urllib.request as urllib2
 from bs4 import BeautifulSoup
 from ioeWebScrapper import to_json
 from utils import ioeBot
-from pymessenger import Bot
 import time
 import requests
 
 PAGE_TOKEN = open('token.txt','r').readline()
 MAIN_URL = "https://api.chatfuel.com/bots/5bbd658876ccbc2d050ff23a/users/{0}/send?chatfuel_token=3TYBQLSKuIbKbLEDKroYmTbpCoCtO0XIM04RAx4R0VOpekvwfNgAKdlXu0DxXwH4&chatfuel_block_name=Notice"
 #"&noticeTitle={1}&noticeUrl={2}"
-bot = Bot(PAGE_TOKEN)
+
 
 ioe_bot = ioeBot()
 
@@ -43,9 +42,17 @@ def detectChange():
         if prev_title != now_top_notice[0]['title']:
             #messenger sends message to all subscribers
             print("change")
+            
             no_of_new_notices = find_prev_notice_pos(prev_title,now_top_notice)
+
+            if(no_of_new_notices>5):
+                ioe_bot.save_new_notice(now_top_notice[0])
+                return 0
+
             for x in range(no_of_new_notices):
-            	send_notice(now_top_notice[x])
+                send_notice(now_top_notice[x])
+                
+            
             ioe_bot.save_new_notice(now_top_notice[0])
             # print(now_top_notice[0])
             pass
@@ -55,11 +62,14 @@ def detectChange():
 
     except Exception as e:
         print('Exception:'+str(e))
+
 def find_prev_notice_pos(prev_title,now_notice):
-	for i,x in enumerate(now_notice):
-		if x['title'] == prev_title:
-			return i	
-	
+    for i,x in enumerate(now_notice):
+        if x['title'] == prev_title:
+            return i
+    return i+1
+
+# detectChange()
 while(True):
     detectChange()
     time.sleep(int(ioe_bot.get_sleep_time()))

@@ -1,9 +1,13 @@
-ioeEnv/
+
 __pycache__/
 premier.py
 -server.key
 server.csr
 server.key
 server.pass.key
+<<<<<<< HEAD
 token.txt
 ngrok.exe
+=======
+.vscode/
+>>>>>>> 4d26a70be87b1b87ae70902a74f2ae82232823fd

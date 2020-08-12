@@ -1,6 +1,5 @@
-from wit import Wit
 from firebase import firebase
-from pymessenger import Element, Button
+# from pymessenger import Element, Button
 import requests
 PAGE_ACCESS_TOKEN = open('token.txt','r').readline()
 ACCESS_TOKEN = "WD7F5SXIT5E5YJ2J3EAWAPWZT6F57AYA"
@@ -9,7 +8,6 @@ MY_DB = "https://website-scrapper-bot.firebaseio.com/"
 #create Wit object
 class ioeBot:
     def __init__(self,sender_id=0,fname=None):
-        self.client = Wit(ACCESS_TOKEN)
         self.firebase = firebase.FirebaseApplication(MY_DB)
         self.sender_id = sender_id
         self.fname = None

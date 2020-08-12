@@ -1,8 +1,10 @@
+<<<<<<< HEAD
 
-
-import urllib.request as urllib2
+import requests
+=======
+# import urllib.request as urllib2
+>>>>>>> 4d26a70be87b1b87ae70902a74f2ae82232823fd
 from bs4 import BeautifulSoup
-import pandas as pd
 import sys
 import json
 
@@ -19,8 +21,7 @@ def get_notices(site,page_no):
         # dsite = main_site
         print('main_site '+dsite)
         try:
-            page = urllib2.urlopen(dsite)
-
+            page = requests.get(dsite).text
             soup = BeautifulSoup(page,"html.parser")
             tables = soup.find('table',id='datatable')
             for notice in tables.find_all('tr')[1:]:
